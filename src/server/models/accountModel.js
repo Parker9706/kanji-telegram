@@ -4,7 +4,13 @@ const Schema = mongoose.Schema;
 
 const URI = 'mongodb+srv://pakachan:aEMtuk4JhAmfigw@cluster0.qvt4k.mongodb.net/?retryWrites=true&w=majority';
 
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'userAccounts'});
+mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'userAccounts'})
+.then((console.log('Successfully connected to MongoDB')))
+.catch((error) => {
+  console.log("Database connection failed. exiting now...");
+  console.error(error);
+  process.exit(1);
+});
 
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
