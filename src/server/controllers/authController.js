@@ -21,16 +21,16 @@ authController.register = async (req, res, next) => {
     // If email already exists, throw an error
     if (checkEmail.length > 0) {
       return next({
-        log: 'Error: Email already exists, cannot create a new account',
+        log: `Email: '${emailAddress}' already exists in the database`,
         status: 409,
-        message: { err: 'Account already exists, please log in or reset your passwords' },
+        message: { err: 'Account already exists, please log in or reset your password' },
       })
     }
   } catch(err) {
     return next({
-      log: `Error: ${err}`,
+      log: `authController.register received an error: ${err}`,
       status: 400,
-      message: { err: 'An error occured while attempting to create a new account. Please contact support.' },
+      message: { err: 'An error occured while attempting to create a new account. Please try again.' },
     })
   }
 
