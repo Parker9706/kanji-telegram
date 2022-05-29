@@ -12,7 +12,7 @@ db.on('error', (error) => console.error(error));
 const userAccount = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  emailAddress: { type: String, required: true },
+  emailAddress: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   created_at: { type: Date, default: Date.now() },
 });
