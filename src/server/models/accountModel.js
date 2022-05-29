@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
+import 'dotenv/config';
 
 const Schema = mongoose.Schema;
 
-const URI = 'mongodb+srv://pakachan:aEMtuk4JhAmfigw@cluster0.qvt4k.mongodb.net/?retryWrites=true&w=majority';
+const URI = process.env.MONGO_URI;
 
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'userAccounts'})
 .then((console.log('Successfully connected to MongoDB')))
