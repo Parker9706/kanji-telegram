@@ -1,0 +1,30 @@
+{
+  "name": "kanji-telegram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server/server.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parker9706/kanji-telegram.git"
+  },
+  "author": "Parker D. Hutcheson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Parker9706/kanji-telegram/issues"
+  },
+  "homepage": "https://github.com/Parker9706/kanji-telegram#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.4",
+    "node-fetch": "^3.2.4",
+    "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.16"
+  }
+}
