@@ -2,10 +2,13 @@
   "name": "kanji-telegram",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server/server.js"
+    "serve": "nodemon src/server/server.js",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear"
   },
   "type": "module",
   "repository": {
@@ -19,6 +22,8 @@
   },
   "homepage": "https://github.com/Parker9706/kanji-telegram#readme",
   "dependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -26,6 +31,15 @@
     "mongoose": "^6.3.4",
     "node-fetch": "^3.2.4",
     "nodemailer": "^6.7.5",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "devDependencies": {
+    "rollup": "^2.75.3",
+    "sirv-cli": "^2.0.2",
+    "svelte": "^3.48.0"
   }
 }

@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 // router.use(isLoggedIn) then all routes in this router would be protected
 
 app.post('/login', authController.login, (req, res) => {
-  return res.status(200).send('loggedin');
+  return res.status(200).json(res.locals.user);
 });
 
 app.post('/register', authController.register, (req, res) => {

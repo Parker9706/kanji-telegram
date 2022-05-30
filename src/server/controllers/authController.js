@@ -2,6 +2,9 @@ import bcrypt from "bcryptjs";
 // const Customer = require('../models/customerModel.js');
 import newUser from './../models/accountModel.js';
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
+
 
 
 const authController = {};
@@ -23,7 +26,7 @@ authController.register = async (req, res, next) => {
       return next({
         log: `Email: '${emailAddress}' already exists in the database`,
         status: 409,
-        message: { err: 'Account already exists, please log in or reset your password' },
+        message: { err: 'User already exists. Please login.' },
       })
     }
   } catch(err) {
@@ -40,7 +43,7 @@ authController.register = async (req, res, next) => {
   const registerUser = await newUser.create({
     firstName: firstName,
     lastName: lastName,
-    emailAddress: emailAddress,
+    emailAddress: emailAddress.toLowerCase(),
     password: hashedPassword
   });
   res.locals.user = registerUser;
@@ -48,7 +51,6 @@ authController.register = async (req, res, next) => {
 }
 
 authController.login = async (req, res, next) => {
-
   const { emailAddress, password } = req.body;
   const salt = bcrypt.genSaltSync(10);
   // const hashedPassword = bcrypt.hashSync(password, salt);
@@ -64,7 +66,15 @@ authController.login = async (req, res, next) => {
   try {
     const evaluateResult = await bcrypt.compareSync(password, findAccount[0].password);
     if (evaluateResult) {
-      res.locals.user = 'success'
+      console.log(`${emailAddress} has completed login successfully!`)
+      const token = jwt.sign(
+        { user_id: emailAddress },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "7 days",
+        }
+      );
+      res.locals.user = token;
       return next();
     } else {
       return next({
@@ -81,6 +91,14 @@ authController.login = async (req, res, next) => {
       message: { err: 'Error occured during login; please try again.' },
     })
   }  
+}
+
+
+
+authController.checkJWT = async (req, res, next) => {
+  // const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+  console.log(req.headers)
+  
 }
 
 export default authController;

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const URI = process.env.MONGO_URI;
 
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'userAccounts'})
+await mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'userAccounts'})
 .then((console.log('Successfully connected to MongoDB')))
 .catch((error) => {
   console.log("Database connection failed. exiting now...");
@@ -21,6 +21,7 @@ const userAccount = new Schema({
   lastName: { type: String, required: true },
   emailAddress: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  jwt: { type: String },
   created_at: { type: Date, default: Date.now() },
 });
 
